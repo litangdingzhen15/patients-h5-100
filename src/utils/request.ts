@@ -3,8 +3,9 @@ import { useUserStore } from '@/stores'
 import axios, { AxiosError, type Method } from 'axios'
 import { showToast } from 'vant'
 
+export const baseURL = 'https://consult-api.itheima.net/'
 const instance = axios.create({
-  baseURL: 'https://consult-api.itheima.net/',
+  baseURL,
   timeout: 10000,
 })
 
