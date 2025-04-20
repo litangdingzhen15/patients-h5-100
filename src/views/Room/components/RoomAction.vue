@@ -1,4 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+
+defineProps<{
+  disabled: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'send-text', text: string): void
+}>()
+
+const text = ref('')
+const sendText = () => {
+  emit('send-text', text.value)
+}
+</script>
 
 <template>
   <div class="room-action">
@@ -8,9 +23,11 @@
       :border="false"
       placeholder="问医生"
       autocomplete="off"
-      :disabled="true"
+      :disabled="disabled"
+      v-model="text"
+      @keyup.enter="sendText"
     ></van-field>
-    <van-uploader :preview-image="false" :disabled="true">
+    <van-uploader :preview-image="false" :disabled="disabled">
       <cp-icon name="consult-img" />
     </van-uploader>
   </div>

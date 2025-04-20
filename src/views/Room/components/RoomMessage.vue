@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { IllnessTime, MsgType } from '@/enums'
 import { flagOptions, timeOptions } from '@/services/constants'
+import { useUserStore } from '@/stores'
 import type { Image } from '@/types/consult'
 import type { Message } from '@/types/room'
 import { showImagePreview, showToast } from 'vant'
+import dayjs from 'dayjs'
 
 defineProps<{ item: Message }>()
 
@@ -16,6 +18,10 @@ const onPreviewImage = (images?: Image[]) => {
   if (images && images.length) showImagePreview(images.map((item) => item.url))
   else showToast('暂无图片')
 }
+
+const store = useUserStore()
+
+const formatTime = (time: string)=>dayjs(time).format('HH:mm')
 </script>
 
 <template>
@@ -52,6 +58,20 @@ const onPreviewImage = (images?: Image[]) => {
     <div class="content">
       <span class="green">温馨提示：</span>
       <span>{{ item.msg.content }}</span>
+    </div>
+  </div>
+  <div class="msg msg-to" v-if="item.msgType === MsgType.MsgText && item.from === store.user?.id">
+    <div class="content">
+      <div class="time">{{ formatTime(item.createTime) }}</div>
+      <div class="pao">{{ item.msg.content }}</div>
+    </div>
+    <van-image :src="item.fromAvatar" />
+  </div>
+  <div class="msg msg-from" v-if="item.msgType === MsgType.MsgText && item.from !== store.user?.id">
+    <van-image :src="item.fromAvatar" />
+    <div class="content">
+      <div class="time">{{ formatTime(item.createTime) }}</div>
+      <div class="pao">{{ item.msg.content }}</div>
     </div>
   </div>
 </template>
