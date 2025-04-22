@@ -27,3 +27,9 @@ export const delPatient = (id: string) => request(`/patient/del/${id}`, 'DELETE'
 
 // 查询患者详情
 export const getPatientDetail = (id: string) => request<Patient>(`/patient/info/${id}`)
+
+export const loginByQQ = (openId: string) =>
+  request<User>('/login/thirdparty', 'POST', { openId, source: 'qq' })
+
+export const bindMobile = (data: { mobile: string; code: string; openId: string }) =>
+  request<User>('/login/binding', 'POST', data)

@@ -48,9 +48,18 @@ const router = createRouter({
       meta: { title: '问诊室' },
       beforeEnter(to) {
         if (to.query.payResult === 'false') return '/user/consult'
-      }
+      },
     },
-
+    {
+      path: '/user/consult',
+      component: () => import('@/views/User/ConsultPage.vue'),
+      meta: { title: '问诊记录' },
+    },
+    {
+      path: '/login/callback',
+      component: () => import('@/views/Login/LoginCallback.vue'),
+      meta: { title: 'QQ登录-绑定手机' },
+    },
     {
       path: '/',
       redirect: '/home',
@@ -92,12 +101,12 @@ const router = createRouter({
 router.beforeEach((to) => {
   NProgress.start()
   const store = useUserStore()
-  const whiteList = ['/login'] // 白名单
+  const whiteList = ['/login', '/login/callback'] // 白名单
   if (!store.user?.token && !whiteList.includes(to.path)) return '/login'
 })
 
 router.afterEach((to) => {
-  document.title = `${to.meta.title || ''}-优医问诊`
+  document.title = `${to.meta.title || ''}-${import.meta.env.VITE_APP_TITLE}`
   NProgress.done()
 })
 

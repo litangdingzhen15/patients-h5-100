@@ -16,8 +16,13 @@ export const useUserStore = defineStore(
       user.value = undefined
     }
 
+    const returnUrl = ref('')
+    const setReturnUrl = (url: string) => {
+      returnUrl.value = url
+    }
+
     // *定义的所有数据、方法都需return
-    return { user, setUser, delUser }
+    return { user, setUser, delUser, returnUrl, setReturnUrl }
   },
   {
     persist: true, // *本地持久化

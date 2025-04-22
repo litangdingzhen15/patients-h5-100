@@ -11,7 +11,7 @@ import type {
 } from '@/types/consult'
 import { request } from '@/utils/request'
 import type { ConsultOrderPreData, ConsultOrderPreParams } from '@/types/consult'
-
+import type { ConsultOrderListParams, ConsultOrderPage } from '@/types/consult'
 
 export const getKnowledgePage = (params: KnowledgeParams) =>
   request<KnowledgePage>('/patient/home/knowledge', 'GET', params)
@@ -47,3 +47,6 @@ export const getConsultOrderPayUrl = (params: {
 
 export const getConsultOrderDetail = (orderId: string) =>
   request<ConsultOrderItem>('/patient/consult/order/detail', 'GET', { orderId })
+
+export const getConsultOrderList = (params: ConsultOrderListParams) =>
+  request<ConsultOrderPage>('/patient/consult/order/list', 'GET', params)
