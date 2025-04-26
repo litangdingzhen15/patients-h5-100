@@ -17,6 +17,7 @@ import { viteMockServe } from 'vite-plugin-mock'
 // https://vite.dev/config/
 export default defineConfig({
   server: {
+    // * 捕获consult-patients.itheima.net地址与80端口，映射到本机地址
     port: 80,
     host: '0.0.0.0',
     allowedHosts: ['consult-patients.itheima.net'],
@@ -33,8 +34,8 @@ export default defineConfig({
     vueDevTools(),
     // 自动导入的插件，解析器可以是 vant element and-vue
     Components({
-      dts: false,
-      // 原因：Toast Confirm 这类组件的样式还是需要单独引入，样式全局引入了，关闭自动引入
+      dts: false, // * 避免重复生成文件
+      // * 原因：Toast Confirm 这类组件的样式还是需要单独引入，样式全局引入了，关闭自动引入
       resolvers: [VantResolver({ importStyle: false })],
     }),
     createSvgIconsPlugin({

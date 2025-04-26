@@ -15,6 +15,10 @@ export type User = {
 // 短信验证码类型，登录|注册|修改手机号|忘记密码|绑定手机号
 export type CodeType = 'login' | 'register' | 'changeMobile' | 'forgetPassword' | 'bindMobile'
 
+
+// export type one = Partial<User> // * Partial包裹后全部可选
+// export type two = Required<User> // * Required包裹后全部可选
+
 /* type Person = {
   name: string
   age: number

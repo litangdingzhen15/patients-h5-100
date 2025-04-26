@@ -41,7 +41,7 @@ onMounted(() => {
     console.log('connect')
   })
 
-  socket.on('error', (event) => {
+  socket.on('error', () => {
     console.log('error')
   })
 
@@ -54,7 +54,7 @@ onMounted(() => {
   socket.on('chatMsgList', ({ data }: { data: TimeMessages[] }) => {
     // 准备转换常规消息列表
     const arr: Message[] = []
-    data.forEach((item, i) => {
+    data.forEach((item) => {
       arr.push({
         msgType: MsgType.Notify,
         msg: { content: item.createTime },

@@ -28,7 +28,7 @@ instance.interceptors.response.use(
     }
     return res.data
   },
-  (err: AxiosError) => {
+  (err: AxiosError) => { // * AxiosError：请求错误类型
     if (err.response?.status === 401) {
       const store = useUserStore()
       store.delUser()

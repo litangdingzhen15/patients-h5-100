@@ -3,10 +3,9 @@
 import { loginByPassword, sendMobileCode, loginByMobile } from '@/services/user'
 import { mobileRules, passwordRules, codedRules } from '@/utils/rules'
 import { showSuccessToast, showToast, type FormInstance } from 'vant'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onUnmounted, ref } from 'vue'
 import { useUserStore } from '@/stores'
 import { useRoute, useRouter } from 'vue-router'
-import { request } from '@/utils/request'
 
 const mobile = ref('')
 const password = ref('')
@@ -127,5 +126,5 @@ const url = `https://graph.qq.com/oauth2.0/authorize?client_id=102015968&respons
 </template>
 
 <style lang="scss" scoped>
-@import '@/styles/login.scss';
+@use '@/styles/login.scss' as *;
 </style>

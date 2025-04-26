@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// * 对于父组件传递的值进行改变并emit传递,可在父组件中直接v-model绑定
 defineProps<{
   options: { label: string; value: string | number }[]
   modelValue?: string | number
